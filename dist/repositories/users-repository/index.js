@@ -8,12 +8,11 @@ async function findByEmail(email) {
     return findEmail;
 }
 ;
-async function create(name, email, address, password) {
+async function create(name, email, password) {
     await database_1.prisma.user.create({
         data: {
             name: name,
             email: email,
-            address: address,
             password: password
         }
     });

@@ -10,10 +10,10 @@ const prisma_utils_1 = require("../../utils/prisma-utils");
 const errors_1 = require("./errors");
 const users_repository_1 = __importDefault(require("../../repositories/users-repository"));
 const session_repository_1 = __importDefault(require("../../repositories/session-repository"));
-async function createUser({ name, email, address, password }) {
+async function createUser({ name, email, password }) {
     await validateUniqueEmail(email);
     const hashedPassword = await bcrypt_1.default.hash(password, 10);
-    await users_repository_1.default.create(name, email, address, hashedPassword);
+    await users_repository_1.default.create(name, email, hashedPassword);
 }
 exports.createUser = createUser;
 ;

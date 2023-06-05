@@ -4,10 +4,10 @@ import userService from "../services/users-service";
 import { SignInParams } from "../services/users-service";
 
 export async function createUser(req: Request, res: Response) {
-    const { name, email, address, password } = req.body;
+    const { name, email, password } = req.body;
   
     try {
-      await userService.createUser({ name, email, address, password });
+      await userService.createUser({ name, email, password });
 
       return res.sendStatus(httpStatus.CREATED);
     } 

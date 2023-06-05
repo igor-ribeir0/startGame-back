@@ -6,12 +6,12 @@ import { duplicatedEmailError, invalidEmailPasswordError } from "./errors";
 import userRepository from "../../repositories/users-repository";
 import sessionRepository from "../../repositories/session-repository";
 
-export async function createUser({ name, email, address, password }: CreateUserParams) {
+export async function createUser({ name, email, password }: CreateUserParams) {
   await validateUniqueEmail(email);
 
   const hashedPassword = await bcrypt.hash(password, 10);
 
-  await userRepository.create(name, email, address, hashedPassword);
+  await userRepository.create(name, email, hashedPassword);
 };
 
 export async function searchUser(params: SignInParams): Promise<SignInResult> {
@@ -49,7 +49,7 @@ async function createSession(userId: number){
   return token;
 };
 
-export type CreateUserParams = Pick<User, 'name' | 'email' | 'address' | 'password'>;
+export type CreateUserParams = Pick<User, 'name' | 'email' | 'password'>;
 export type SignInParams = Pick<User, 'email' | 'password'>;
 
 type SignInResult = {
