@@ -11,11 +11,13 @@ const envs_1 = require("./config/envs");
 const database_1 = require("./config/database");
 (0, envs_1.loadEnv)();
 const users_router_1 = __importDefault(require("./routers/users-router"));
+const users_router_2 = __importDefault(require("./routers/users-router"));
 const app = (0, express_1.default)();
 app
     .use((0, cors_1.default)())
     .use(express_1.default.json())
-    .use('/users', users_router_1.default);
+    .use('/users', users_router_1.default)
+    .use('/product', users_router_2.default);
 function init() {
     (0, database_1.connectDb)();
     return Promise.resolve(app);

@@ -24,7 +24,7 @@ model Game {
   id    Int    @id @default(autoincrement())
   name  String @unique
   price Int
-  image String @unique
+  url String @unique
 }
 
 model Purchase {

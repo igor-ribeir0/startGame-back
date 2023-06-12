@@ -7,12 +7,14 @@ import { connectDb, disconnectDB } from "./config/database";
 loadEnv();
 
 import userRouter from "./routers/users-router";
+import productRouter from "./routers/users-router";
 
 const app = express();
 app
   .use(cors())
   .use(express.json())
   .use('/users', userRouter)
+  .use('/product', productRouter)
 
 export function init() {
   connectDb();
