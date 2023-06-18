@@ -14,7 +14,7 @@ export async function createUser({ name, email, password }: CreateUserParams) {
   await userRepository.create(name, email, hashedPassword);
 };
 
-export async function searchUser(params: SignInParams): Promise<SignInResult> {
+export async function searchUser(params: SignInParams) {
   const { email, password } = params;
 
   const user = await userRepository.findByEmail(email);
@@ -26,7 +26,7 @@ export async function searchUser(params: SignInParams): Promise<SignInResult> {
   const token = await createSession(user.id);
 
   return {
-    user: exclude(user, 'password'),
+    user: user.id,
     token,
   };
 };
