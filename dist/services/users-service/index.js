@@ -6,14 +6,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.searchUser = exports.createUser = void 0;
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
-const prisma_utils_1 = require("../../utils/prisma-utils");
 const errors_1 = require("./errors");
 const users_repository_1 = __importDefault(require("../../repositories/users-repository"));
 const session_repository_1 = __importDefault(require("../../repositories/session-repository"));
-async function createUser({ name, email, password }) {
+async function createUser({ name, email, address, complement, cep, password }) {
     await validateUniqueEmail(email);
     const hashedPassword = await bcrypt_1.default.hash(password, 10);
-    await users_repository_1.default.create(name, email, hashedPassword);
+    await users_repository_1.default.create(name, email, address, complement, cep, hashedPassword);
 }
 exports.createUser = createUser;
 ;
@@ -27,7 +26,7 @@ async function searchUser(params) {
         throw (0, errors_1.invalidEmailPasswordError)();
     const token = await createSession(user.id);
     return {
-        user: (0, prisma_utils_1.exclude)(user, 'password'),
+        user: user.id,
         token,
     };
 }

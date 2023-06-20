@@ -7,9 +7,9 @@ exports.searchUser = exports.createUser = void 0;
 const http_status_1 = __importDefault(require("http-status"));
 const users_service_1 = __importDefault(require("../services/users-service"));
 async function createUser(req, res) {
-    const { name, email, password } = req.body;
+    const { name, email, address, complement, cep, password } = req.body;
     try {
-        await users_service_1.default.createUser({ name, email, password });
+        await users_service_1.default.createUser({ name, email, address, complement, cep, password });
         return res.sendStatus(http_status_1.default.CREATED);
     }
     catch (error) {
